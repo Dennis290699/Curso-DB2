@@ -34,9 +34,9 @@ Descarga el instalador de Beekeeper Studio desde [este enlace](https://github.co
 
 Ejecuta el instalador descargado y sigue las instrucciones en pantalla para completar la instalación de Beekeeper Studio en tu sistema.
 
-## Realizar el Test
+## Realizar el Test y Configuración de la Base de Datos
 
-Una vez que hayas instalado MySQL en Docker y Beekeeper Studio en tu sistema, realiza el test siguiendo estos pasos:
+Una vez que hayas instalado MySQL en Docker y Beekeeper Studio en tu sistema, realiza el test y configura la base de datos siguiendo estos pasos:
 
 1. Abre Beekeeper Studio.
 
@@ -44,7 +44,7 @@ Una vez que hayas instalado MySQL en Docker y Beekeeper Studio en tu sistema, re
    - Usuario: root
    - Contraseña: admin123
 
-    > **Nota**: Si todo va bien, el test deberá mostrar un mensaje de confirmación. Procede al siguiente paso.
+   > **Nota**: Si todo va bien, el test deberá mostrar un mensaje de confirmación. Procede al siguiente paso.
 
 3. Ahora con las mismas credenciales, haz clic en "Connect".
 
@@ -58,7 +58,40 @@ GRANT ALL PRIVILEGES ON *.* TO 'redis'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
 
-    > **Confirmación**: Una vez que hayas ejecutado con éxito el script SQL, la configuración del usuario `redis` deberá estar completa.
+   > **Nota**: Una vez que hayas ejecutado con éxito el script SQL, la configuración del usuario `redis` deberá estar completa.
 
->.[!IMPORTANT].
-> Ahora la credenciales cambiaron tanto el usuario como el password son redis.
+   > **Importante**: Ahora las credenciales cambiaron, tanto el usuario como la contraseña son "redis".
+
+## Descargar el Script SQL
+
+1. Descarga el script SQL desde [este enlace](https://github.com/datacharmer/test_db).
+
+2. Descomprime el archivo y verifica la ruta de guardado.
+
+## Copia de Archivos al Contenedor
+
+1. Copia los archivos y pégalos en el contenedor ejecutando el siguiente comando en tu terminal:
+
+```bash
+docker cp Ruta/de/la/carpeta/test_db-master MySQL_Container:/home/
+```
+
+2. Abre una sesión dentro del contenedor ejecutando el siguiente comando en tu terminal:
+
+```bash
+docker exec -it MySQL_Container bash
+```
+
+3. Dirígete al directorio dentro del contenedor donde copiaste la carpeta ejecutando el siguiente comando en el contenedor:
+
+```bash
+cd /home/test_db-master
+```
+
+4. Ejecuta el Script SQL "employees.sql" dentro del contenedor utilizando el siguiente comando en el contenedor:
+
+```bash
+mysql -u root -p < employees.sql
+```
+
+   > **Nota**: El password será `redis`.
