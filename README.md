@@ -61,4 +61,4 @@ FLUSH PRIVILEGES;
     > **Confirmación**: Una vez que hayas ejecutado con éxito el script SQL, la configuración del usuario `redis` deberá estar completa.
 
 >.[!IMPORTANT].
-    Ahora la credenciales cambiaron tanto el usuario como el password son redis.
+> Ahora la credenciales cambiaron tanto el usuario como el password son redis.
