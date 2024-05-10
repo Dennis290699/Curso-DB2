@@ -95,3 +95,26 @@ mysql -u root -p < employees.sql
 ```
 
    > **Nota**: El password será `redis`.
+
+
+# Consultas SQL
+
+## Proporcionar una lista con los salarios de todos los empleados
+
+```bash
+SELECT e.emp_no, e.first_name, e.last_name, s.salary
+FROM employees e
+INNER JOIN salaries s ON e.emp_no = s.emp_no;
+```
+
+## ¿Cuáles son los empleados que están en el departamento de servicio al cliente?
+
+```bash
+SELECT e.emp_no, e.first_name, e.last_name
+FROM employees e
+INNER JOIN dept_emp de ON e.emp_no = de.emp_no
+INNER JOIN departments d ON de.dept_no = d.dept_no
+WHERE d.dept_name = 'Customer Service';
+```
+
+
